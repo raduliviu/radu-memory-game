@@ -25,6 +25,8 @@ function setBoard() {
     }
 }
 
+setBoard();
+
 //2. As a player, if I click a card, I want it to be revealed so that I know what it represents
 //3. As a player, if I click a second card, I want it to be revealed so that I can see if it is like the first card
 //4. As a player, if I have two cards revealed that do not match, I want them to become closed again
