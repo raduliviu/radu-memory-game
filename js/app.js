@@ -29,11 +29,32 @@ setBoard();
 
 //2. As a player, if I click a card, I want it to be revealed so that I know what it represents
 //3. As a player, if I click a second card, I want it to be revealed so that I can see if it is like the first card
-//4. As a player, if I have two cards revealed that do not match, I want them to become closed again
-//5. As a player, if I have two cards revealed that match, I want them to remain open and change their color to indicate they’re matched
+let clickedCards = [];
+let matchedCards = 0;
+
+$('.card').click(function() {
+    if (!$(this).hasClass('open show')) {
+        $(this).addClass('open show');
+        clickedCards.push($(this));
+        if (clickedCards.length === 2) {
+            let firstCard = clickedCards[0].children().attr('class');
+            let secondCard = clickedCards[1].children().attr('class');
+            if (firstCard !== secondCard) {             //4. As a player, if I have two cards revealed that do not match, I want them to become closed again
+                clickedCards[0].removeClass('open show');
+                clickedCards[1].removeClass('open show');
+                clickedCards = [];
+            } else {                //5. As a player, if I have two cards revealed that match, I want them to remain open and change their color to indicate they’re matched
+                clickedCards[0].removeClass('open show').addClass('match');
+                clickedCards[1].removeClass('open show').addClass('match');
+                matchedCards++;
+                clickedCards = [];
+            }
+        }
+    }
+});
+
 //6. As a player, if I have matched all the cards on the board, I want to receive a congratulations message so that I feel good about finishing the game
 //7. As a player, I want to have a restart button on the board so that I can start the game from the beginning if I want to
 //8. As a player, I want to have a timer on the page that starts when I click the first card and ends when I finish the game, so that I know how long the game took me
 //9. As a player, I want to have a move counter on the page that increments every time I click on a card, so that I know how many moves the game took me
 //10. As a player, I want to have a star rating on the page that decreases based on the number of moves I made in the game¸
-//
