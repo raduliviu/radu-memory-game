@@ -36,7 +36,10 @@ $('.card').click(function() {
     if (!$(this).hasClass('open show')) {       //I'm checking if a card is already open, if it's not, then I open it
         $(this).addClass('open show');
         clickedCards.push($(this));
-        if (clickedCards.length === 2) {             
+        if (clickedCards.length === 2) {
+            //9. As a player, I want to have a move counter on the page that increments every time I click on a pair of cards, so that I know how many moves the game took me
+            //Moves incrementer taken from https://stackoverflow.com/a/4701358
+            $('.moves').html(function (i, val) { return val * 1 + 1 });      
             //4. As a player, if I have two cards revealed that do not match, I want them to become closed again
             let firstCard = clickedCards[0].children().attr('class');
             let secondCard = clickedCards[1].children().attr('class');
@@ -64,7 +67,6 @@ $('.card').click(function() {
     }
 });
 
-//7. As a player, I want to have a restart button on the board so that I can start the game from the beginning if I want to
 //8. As a player, I want to have a timer on the page that starts when I click the first card and ends when I finish the game, so that I know how long the game took me
 //Count-up timer got from https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
 var Clock = {
@@ -108,6 +110,5 @@ $('.deck').one("click", function () {
     Clock.start();
 });
 
-//9. As a player, I want to have a move counter on the page that increments every time I click on a card, so that I know how many moves the game took me
-//https://stackoverflow.com/questions/4701349/jquery-increase-the-value-of-a-counter-when-a-button-is-clicked
 //10. As a player, I want to have a star rating on the page that decreases based on the number of moves I made in the game¸
+//7. As a player, I want to have a restart button on the board so that I can start the game from the beginning if I want to
