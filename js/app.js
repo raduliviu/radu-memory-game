@@ -41,11 +41,13 @@ $('.card').click(function() {
             let firstCard = clickedCards[0].children().attr('class');
             let secondCard = clickedCards[1].children().attr('class');
             if (firstCard !== secondCard) {
-                setTimeout(function wait() {        //The non-matching cards are displayed together for 350ms on the page, then they get flipped back
+                $('.deck').addClass('noclick')      //Player can't click on a third card until the unmatching cards are flipped back
+                setTimeout(function wait() {        //The non-matching cards are displayed together for a little while on the page, then they get flipped back
                     clickedCards[0].removeClass('open show');
                     clickedCards[1].removeClass('open show');
                     clickedCards = [];
-                }, 350);
+                    $('.deck').removeClass('noclick')
+                }, 700);
             } else {                
                 //5. As a player, if I have two cards revealed that match, I want them to remain open and change their color to indicate they’re matched
                 clickedCards[0].removeClass('open show').addClass('match');
@@ -64,7 +66,7 @@ $('.card').click(function() {
 
 //7. As a player, I want to have a restart button on the board so that I can start the game from the beginning if I want to
 //8. As a player, I want to have a timer on the page that starts when I click the first card and ends when I finish the game, so that I know how long the game took me
-//https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
+//Count-up timer got from https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
 var Clock = {
     totalSeconds: 0,
 
