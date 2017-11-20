@@ -121,3 +121,14 @@ $('.deck').one("click", function () {
 });
 
 //7. As a player, I want to have a restart button on the board so that I can start the game from the beginning if I want to
+$('.restart').click(function () {
+    clickedCards = [];
+    matchedCards = 0;
+    $('.card').removeClass('open show match');
+    setBoard();
+    Clock.reset();
+    $('.moves').text('0');
+    $('.deck').one("click", function () {
+        Clock.start();
+    });
+});
