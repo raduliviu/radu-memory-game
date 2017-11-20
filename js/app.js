@@ -39,7 +39,17 @@ $('.card').click(function() {
         if (clickedCards.length === 2) {
             //9. As a player, I want to have a move counter on the page that increments every time I click on a pair of cards, so that I know how many moves the game took me
             //Moves incrementer taken from https://stackoverflow.com/a/4701358
-            $('.moves').html(function (i, val) { return val * 1 + 1 });      
+            $('.moves').html(function (i, val) { return val * 1 + 1 });
+            //10. As a player, I want to have a star rating on the page that decreases based on the number of moves I made in the game¸
+            if (Number($('.moves').text()) <= 8) {
+                console.log('On your way to a 3-star game!');
+            } else if (Number($('.moves').text()) > 8 && Number($('.moves').text()) < 16) {
+                console.log('Entering two star territory!');
+                $('.stars > li:first-child > i').removeClass('fa-star').addClass('fa-star-o');
+            }  else {
+                console.log('One star, but at least you are having fun!');
+                $('.stars > li:nth-child(2) > i').removeClass('fa-star').addClass('fa-star-o');
+            }
             //4. As a player, if I have two cards revealed that do not match, I want them to become closed again
             let firstCard = clickedCards[0].children().attr('class');
             let secondCard = clickedCards[1].children().attr('class');
@@ -110,5 +120,4 @@ $('.deck').one("click", function () {
     Clock.start();
 });
 
-//10. As a player, I want to have a star rating on the page that decreases based on the number of moves I made in the game¸
 //7. As a player, I want to have a restart button on the board so that I can start the game from the beginning if I want to
