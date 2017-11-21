@@ -71,9 +71,12 @@ $('.card').click(function() {
         }
     }
     //6. As a player, if I have matched all the cards on the board, I want to receive a congratulations message so that I feel good about finishing the game
-    if (matchedCards === 8) {       //Placeholder, just wanted to see the mechanism works
-        $('h1').css('color', 'red');
+    if (matchedCards === 8) {
         Clock.pause();
+        $('#congratsModal').modal('show');
+        $('.moves').clone().appendTo('#finishedMoves');
+        $('.timer').clone().appendTo('#finishedTime');
+        $('.stars').clone().addClass('end-score').appendTo('#finishedRating');
     }
 });
 
@@ -121,7 +124,7 @@ $('.deck').one("click", function () {
 });
 
 //7. As a player, I want to have a restart button on the board so that I can start the game from the beginning if I want to
-$('.restart').click(function () {
+function gameRestart() {
     clickedCards = [];
     matchedCards = 0;
     $('.card').removeClass('open show match');
@@ -133,4 +136,11 @@ $('.restart').click(function () {
     $('.deck').one("click", function () {
         Clock.start();
     });
+    $('#finishedMoves').empty();
+    $('#finishedTime').empty();
+    $('#finishedRating').empty();
+}
+
+$('.restart').click(function () {
+    gameRestart();
 });

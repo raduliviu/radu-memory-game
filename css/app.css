@@ -125,3 +125,12 @@ h1 {
 .deck.noclick {
     pointer-events: none;
 }
+
+.end-score {
+    padding: 0;
+    display: inline-block;
+}
+.end-score li {
+    list-style: none;
+    display: inline-block;
+}
