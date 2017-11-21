@@ -125,6 +125,8 @@ $('.restart').click(function () {
     clickedCards = [];
     matchedCards = 0;
     $('.card').removeClass('open show match');
+    $('.stars > li:first-child > i').removeClass('fa-star-o').addClass('fa-star');
+    $('.stars > li:nth-child(2) > i').removeClass('fa-star-o').addClass('fa-star');
     setBoard();
     Clock.reset();
     $('.moves').text('0');
