@@ -1,4 +1,3 @@
-//1. As a player, I want the board to be randomized every time I load the game so that I have a different playing experience every time
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -14,7 +13,7 @@ function shuffle(array) {
     return array;
 }
 
-//I'm creating a function that shuffles the cards and inserts them into the HTML
+//Function that shuffles the cards and inserts them into the HTML
 function setBoard() {
     const cards = $('.card');
 
@@ -27,20 +26,22 @@ function setBoard() {
 
 setBoard();
 
-//2. As a player, if I click a card, I want it to be revealed so that I know what it represents
-//3. As a player, if I click a second card, I want it to be revealed so that I can see if it is like the first card
+//Empty array that will hold the cards that are clicked
 let clickedCards = [];
+//Counter to keep track of how many pairs have been matched
 let matchedCards = 0;
 
+//When clicking on a card...
 $('.card').click(function() {
-    if (!$(this).hasClass('open show')) {       //I'm checking if a card is already open, if it's not, then I open it
+//I'm checking if a card is already open, if it's not, then I open it
+    if (!$(this).hasClass('open show')) {       
         $(this).addClass('open show');
         clickedCards.push($(this));
         if (clickedCards.length === 2) {
-            //9. As a player, I want to have a move counter on the page that increments every time I click on a pair of cards, so that I know how many moves the game took me
+            //Every time a pair of cards is clicked, I increment the move counter
             //Moves incrementer taken from https://stackoverflow.com/a/4701358
             $('.moves').html(function (i, val) { return val * 1 + 1 });
-            //10. As a player, I want to have a star rating on the page that decreases based on the number of moves I made in the game¸
+            //Star rating for the game, you get less stars based on how many moves you make
             if (Number($('.moves').text()) <= 8) {
                 console.log('On your way to a 3-star game!');
             } else if (Number($('.moves').text()) > 8 && Number($('.moves').text()) < 16) {
@@ -50,19 +51,21 @@ $('.card').click(function() {
                 console.log('One star, but at least you are having fun!');
                 $('.stars > li:nth-child(2) > i').removeClass('fa-star').addClass('fa-star-o');
             }
-            //4. As a player, if I have two cards revealed that do not match, I want them to become closed again
+            //Mechanism for closing pairs of cards that do not match
             let firstCard = clickedCards[0].children().attr('class');
             let secondCard = clickedCards[1].children().attr('class');
             if (firstCard !== secondCard) {
-                $('.deck').addClass('noclick')      //Player can't click on a third card until the unmatching cards are flipped back
-                setTimeout(function wait() {        //The non-matching cards are displayed together for a little while on the page, then they get flipped back
+                //Player can't click on a third card until the unmatching cards are flipped back
+                $('.deck').addClass('noclick')
+                //The non-matching cards are displayed together for a little while on the page, then they get flipped back
+                setTimeout(function wait() {
                     clickedCards[0].removeClass('open show');
                     clickedCards[1].removeClass('open show');
                     clickedCards = [];
                     $('.deck').removeClass('noclick')
                 }, 700);
             } else {                
-                //5. As a player, if I have two cards revealed that match, I want them to remain open and change their color to indicate they’re matched
+                //If two cards match, I lock them into position on the page and I also let the game know that we have made progress towards the victory condition
                 clickedCards[0].removeClass('open show').addClass('match');
                 clickedCards[1].removeClass('open show').addClass('match');
                 matchedCards++;
@@ -70,7 +73,7 @@ $('.card').click(function() {
             }
         }
     }
-    //6. As a player, if I have matched all the cards on the board, I want to receive a congratulations message so that I feel good about finishing the game
+    //When all the cards are matched, you get a victory pop-up
     if (matchedCards === 8) {
         Clock.pause();
         $('#congratsModal').modal('show');
@@ -80,7 +83,6 @@ $('.card').click(function() {
     }
 });
 
-//8. As a player, I want to have a timer on the page that starts when I click the first card and ends when I finish the game, so that I know how long the game took me
 //Count-up timer got from https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
 var Clock = {
     totalSeconds: 0,
@@ -119,11 +121,12 @@ var Clock = {
     }
 };
 
+//The first time you click on the deck of cards, you start a count-up timer
 $('.deck').one("click", function () {
     Clock.start();
 });
 
-//7. As a player, I want to have a restart button on the board so that I can start the game from the beginning if I want to
+//Reset functionality to start a new game
 function gameRestart() {
     clickedCards = [];
     matchedCards = 0;

@@ -3,18 +3,11 @@
 ## Table of Contents
 
 * [Instructions](#instructions)
-* [Contributing](#contributing)
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+This is a Memory Game developed as part of my Udacity Front End Web Developer Nanodegree. To play, either clone the project locally and run index.html or play it online here:
+https://raduliviu.github.io/radu-memory-game/
 
-To get started, open `js/app.js` and start building out the app's functionality
+Clicking a card reveals the symbol from under it. You can only have two cards revealed at once, and if they do not match, they will get flipped back. Once you get two cards that do match, they get locked into place. The game ends when you match all pairs
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
