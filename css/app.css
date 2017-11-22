@@ -125,3 +125,7 @@ h1 {
     list-style: none;
     display: inline-block;
 }
+
+.modal-body {
+    font-size: larger;
+}
